@@ -32,8 +32,7 @@
 <a name="head" class="anchor"><span class="octicon octicon-link"></span></a>难道git博客就这样使？</h3>
 
 <p>这个页面由git的自动生成工具生成，原理是显示在仓库https://github.com/username/username.github.io的页面，理论上只能是静态页面吧，暂时用着先。</p>
-<h3>
-<a name="head" class="anchor"><span class="octicon octicon-link"></span></a>7.21--oracle11g导9i后的问题</h3>
+<h3><a name="head" class="anchor"><span class="octicon octicon-link"></span></a>7.21--oracle11g导9i后的问题</h3>
 	<p>导进去的时候除了些莫名其妙的问题，有三个是必须处理的问题，一个是要强制表空间，不然没数据的表导不进去，第二是若程序里有Megre的sql语句的话，要检查有
 		没有where 如 Megre into A using b on (XXX) when matched then update A set XXX where XXX when not matched then insert into A values(XXXX) 这里的update语句有
 		where，在9i运行会报missing key word 的错，11g是可以的，解决的办法就是把where的条件放on 后面。当时遇到错的时候，用navicat把句子放到存储过程里面编译下，可以看到
@@ -41,7 +40,7 @@
 		没问题，以前dump是可以的，但变成用语句insert into是不可以的。说起导数据最后还有个问题，就是导的时候数据和序列是分开导，好像序列还是先导的，导完后很容易造成
 		主键冲突，因为导的时候服务器在工作，导致表最大的id比序列的下个值大。
 		</p>
-<a name="head" class="anchor"><span class="octicon octicon-link"></span></a>7.29--oracle 9i下报参数没绑定全的错</h3>
+<h3><a name="head" class="anchor"><span class="octicon octicon-link"></span></a>7.29--oracle 9i下报参数没绑定全的错</h3>
 		<p>		
 		这个错误很奇怪，用merge into时里面的using（）里面的条件用占位符会产生这个错，无论是一个参数还是多个或者是任何类型，只要有占位符就会报错，如果换成11g就没问题，初步认为是驱动问题，但ojdbc5没源码，反编译也看不出个所以然。
 		解决办法，用间接写死的办法：比如using（select * from table where id = ' + id + '）代码写入。
